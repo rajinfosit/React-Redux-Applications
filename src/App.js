@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{Component} from 'react';
+import OnHandClickCompo from './Component/OnHandClickCompo'
+import OnInputChangeCompo from './Component/OnInputChangeCompo'
+import ItemsCompo from './Component/ItemsCompo'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+class App extends Component{
+
+  constructor(props){
+    super(props);
+    this.state={
+      val:'',
+      items:[],
+    };
+  }
+
+
+  onInputChangeMethod=e=>{
+    let val1=e.target.value
+    this.setState({
+      val:val1
+    })
+  }
+
+  onHandleClickMethod=()=>{
+    let item=this.state.val,
+    list2=this.state.items;
+    list2.push(item);
+
+    this.setState({
+      items:list2
+    })
+  }
+
+render(){
+  let items=this.state.items;
+  return(
+    <div>
+      <OnInputChangeCompo
+      onInputChange={this.onInputChangeMethod}>
+      </OnInputChangeCompo>
+
+      <OnHandClickCompo 
+      onHandleClick={this.onHandleClickMethod}>
+      </OnHandClickCompo>
+
+      <ItemsCompo items={items}>
+
+      </ItemsCompo>
+      
+
     </div>
-  );
+
+  )
+}
 }
 
 export default App;
